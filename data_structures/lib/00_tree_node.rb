@@ -19,39 +19,49 @@ class PolyTreeNode
 
   def parent=(new_parent)
     if !parent.nil?
-      self.parent.remove_child(self)
+      parent.children.delete(self)
+    end
+    
+    if !new_parent.nil?
+      new_parent.children << self
     end
 
     @parent = new_parent
-    
-    if !new_parent.nil?
-      new_parent.children = self
-    end
   end
 
-  def remove_child(child) 
-    child_idx = self.children.index(child)
-    self.children.delete_at(child_idx) 
+  def remove_child(child)
+    raise "Nota a child" unless self.children.include?(child) 
+    child.parent = nil
   end 
 
-  def children=(child)
-    if !children.include?(child)
-      @children << child
+  def add_child(child)
+    if children.include?(child)
+      return
+    else
+      child.parent = self
     end
+
+    # unless children.include?(child)
+    #   @children << child
+    #   child.parent = self
+    # end
   end
 
 end
 
 if $PROGRAM_NAME == __FILE__
-  branch =PolyTreeNode.new(5)
-  root = PolyTreeNode.new(2)
-  branch.parent = root # add branch to roots children
+  a = PolyTreeNode.new('a')
+  b = PolyTreeNode.new('b')
+  c = PolyTreeNode.new('c')
+  d = PolyTreeNode.new('d')
+  e = PolyTreeNode.new('e')
 
-  # root.remove_child(branch)
+  b.parent = a # a:b 
+  a.children = c # { a: [b,c]}
+  b.parent = d # { d: [b] , a: [c] }   
+  b.add_child(e)
 
-  other_root = PolyTreeNode.new(3)
-  branch.parent = other_root
-
-
-  # PolyTreeNode.remove_child(root, branch) # root's children will be empty
+  puts "a children: #{a.children.map(&:value)}"
+  puts "d children: #{d.children.map(&:value)}" 
+  puts "b children: #{b.children.map(&:value)}" 
 end
