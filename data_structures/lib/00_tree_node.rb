@@ -61,6 +61,10 @@ class PolyTreeNode
     nil
   end
 
+  def inspect
+    @value.inspect
+  end
+
 end
 
 if $PROGRAM_NAME == __FILE__

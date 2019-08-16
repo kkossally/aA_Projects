@@ -8,30 +8,44 @@ class KnightPathFinder
   def initialize(start_pos) # [0, 0]
     @start_pos = start_pos
     @root_node = PolyTreeNode.new(start_pos)
-    build_move_tree
     @considered_pos = [start_pos]
+    build_move_tree
   end
 
-  def build_move_tree 
+  def build_move_tree
+    tree = []
+    possible_moves = self.new_move_positions(root_node.value)
+    possible_moves.each do |move|
+      new_node = PolyTreeNode.new(move)
+      new_node.parent = root_node
+      tree << new_node
+    end
+    
+    # repeat this process until new_move_positions returns an empty array
+    tree
   end 
 
-  def self.valid_moves(pos) # returns an array of possible positions [[0,0], [1,0]...]
-    # x and y must be between 0 and 7 inclusive
-    # pos[0] - 
-    valid_moves = [[3,5], [2,4], [2,2], [3,1], [5, 1], [6, 2], [6,4], [5, 5]] # start pos is [4, 3]
-    valid_moves
+  def self.valid_moves(from_pos) # returns an array of possible positions [[0,0], [1,0]...]
+    # valid_moves = [[3,5], [2,4], [2,2], [3,1], [5, 1], [6, 2], [6,4], [5, 5]] # start pos is [4, 3]
+    moves = []
+    7.times do |x| 
+      7.times do |y| 
+        to_pos = [x, y]
+        moves << to_pos if valid_move?(from_pos, to_pos)
+      end 
+    end 
+    moves 
   end
 
-  def valid_move?(new_pos) # return true if new_pos is valid
-    x0, y0 = start_pos
-    x1 , y1 = new_pos
-    # return false if x or y is not between 0 and 7 inclusive
-    return false if !x1.between?(0, 7) || !y1.between?(0, 7)
+  def self.valid_move?(from_pos, to_pos) # return true if new_pos is valid
+    x0, y0 = from_pos
+    x1 , y1 = to_pos
+    return false unless (x1 - x0).abs <= 2 && (y1 - y0).abs <= 2
     (x1 - x0).abs + (y1 - y0).abs == 3
   end
 
-  def new_move_positions(pos)  # returns an array of new moves not in considered postions and then adds them to consiered positions
-    new_moves = KnightPathFinder.valid_moves(pos).reject {|move| considered_pos.include?(move) } # position will be current position 
+  def new_move_positions(from_pos)  # returns an array of new moves not in considered postions and then adds them to considered positions
+    new_moves = KnightPathFinder.valid_moves(from_pos).reject {|move| considered_pos.include?(move) } # position will be current position 
     considered_pos.concat(new_moves)
     new_moves
   end 
@@ -39,11 +53,17 @@ class KnightPathFinder
 end
 
 if $PROGRAM_NAME == __FILE__
-  kpf = KnightPathFinder.new([4, 3])
-  
-  # p kpf.new_move_positions([4, 3])
-  # p kpf.considered_pos
+  p kpf = KnightPathFinder.new([4, 3])
 
-  p kpf.valid_move?([3, 5])
-  p kpf.valid_move?([6, 3])
+  # p KnightPathFinder.valid_moves([4,3])
+  
+  # kpf.considered_pos += [[3,5], [2,4], [2,2]]
+  # p "considered positions #{kpf.considered_pos}"
+
+  # p kpf.new_move_positions([4, 3])
+  # p KnightPathFinder.valid_moves
+  
+
+  # p kpf.valid_move?([3, 5])
+  # p kpf.valid_move?([6, 3])
 end
