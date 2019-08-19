@@ -14,7 +14,7 @@ class Board
       (0..7).each do |col|
         if row < 2 || row > 5
             pos = [row, col]
-          self[pos] = 'piece'
+          self[pos] = Piece.new 
         end
       end
     end
@@ -31,7 +31,13 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    
+    if self[start_pos].nil? 
+      raise 'start position empty'
+    elsif !self[end_pos].nil? 
+      raise 'end position not empty'
+    end
+    self[start_pos] = nil
+    self[end_pos] = Piece.new 
   end
 
 end
@@ -39,5 +45,7 @@ end
 
 if $PROGRAM_NAME == __FILE__ 
   board = Board.new 
-  p board.rows  
+  board.move_piece([0,0], [2,0])
+  puts board.rows 
 end 
+
