@@ -32,12 +32,13 @@ class Board
 
   def move_piece(start_pos, end_pos)
     if self[start_pos].nil? 
-      raise 'start position empty'
+      raise ArgumentError.new('start position empty')
     elsif !self[end_pos].nil? 
-      raise 'end position not empty'
+      raise ArgumentError.new('end position not empty')
     end
+    temp_piece = self[start_pos]
     self[start_pos] = nil
-    self[end_pos] = Piece.new 
+    self[end_pos] = temp_piece 
   end
 
 end
