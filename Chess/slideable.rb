@@ -1,11 +1,10 @@
 module Slideable
+  
   def horizontal_dirs 
-    # Slideable.HORIZONTAL_DIRS
     HORIZONTAL_DIRS
   end
   
   def diagonal_dirs 
-    # Slideable.DIAGONAL_DIRS
     DIAGONAL_DIRS
   end
 
@@ -18,7 +17,6 @@ module Slideable
   end
 
   private
-  # attr_reader :HORIZONTAL_DIRS, :DIAGONAL_DIRS
 
   HORIZONTAL_DIRS = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]
   DIAGONAL_DIRS = [ [-1, -1], [-1, 1], [1, -1], [1, 1] ]
