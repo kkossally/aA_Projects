@@ -8,8 +8,7 @@ class Pawn < Piece
   end
 
   def move_dirs
-    HORIZONTAL_DIRS = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]
-    DIAGONAL_DIRS = [ [-1, -1], [-1, 1], [1, -1], [1, 1] ]
+    side_attacks << forward_steps
   end
 
   private 
@@ -29,7 +28,7 @@ class Pawn < Piece
   end
 
   def side_attacks
-    [forward_dir, forward_dir]
+    [ [forward_dir, forward_dir], [forward_dir, -forward_dir] ]
   end 
 
 

@@ -8,3 +8,5 @@ class Queen < Piece
     :Q 
   end 
 end
+
+("", "", "")

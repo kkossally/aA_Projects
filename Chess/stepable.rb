@@ -1,7 +1,8 @@
 module Stepable
   
   def moves
-    move_diffs
+    #turn move_diffs into actual board positions based on current positions 
+    
   end
 
   private
