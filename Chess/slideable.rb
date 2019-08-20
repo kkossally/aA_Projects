@@ -1,10 +1,12 @@
 module Slideable
   def horizontal_dirs 
-    Slideable.HORIZONTAL_DIRS
+    # Slideable.HORIZONTAL_DIRS
+    HORIZONTAL_DIRS
   end
   
   def diagonal_dirs 
-    Slideable.DIAGONAL_DIRS
+    # Slideable.DIAGONAL_DIRS
+    DIAGONAL_DIRS
   end
 
   def moves
@@ -16,13 +18,13 @@ module Slideable
   end
 
   private
-  attr_reader :HORIZONTAL_DIRS, :DIAGONAL_DIRS
+  # attr_reader :HORIZONTAL_DIRS, :DIAGONAL_DIRS
 
   HORIZONTAL_DIRS = [ [-1, 0], [1, 0], [0, -1], [0, 1] ]
   DIAGONAL_DIRS = [ [-1, -1], [-1, 1], [1, -1], [1, 1] ]
 
   def move_dirs
-    HORIZONTAL_DIRS + DIAGONAL_DIRS
+    horizontal_dirs + diagonal_dirs
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)
