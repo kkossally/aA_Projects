@@ -1,5 +1,8 @@
 require 'byebug'
-require_relative 'piece.rb'
+require_relative 'queen'
+require_relative 'rook'
+require_relative 'knight'
+require_relative 'nullpiece'
 
 class Board 
   attr_accessor :rows 
@@ -12,10 +15,11 @@ class Board
   def set_up_board
     (0..7).each do |row|
       (0..7).each do |col|
-        if row < 2 || row > 5
-            pos = [row, col]
-          self[pos] = Piece.new 
-        end
+        # nil
+        # # if row < 2 || row > 5
+        pos = [row, col]
+        self[pos] = NullPiece.instance
+        # # end
       end
     end
   end
@@ -45,8 +49,15 @@ end
 
 
 if $PROGRAM_NAME == __FILE__ 
-  board = Board.new 
-  board.move_piece([0,0], [2,0])
-  puts board.rows 
+  board = Board.new
+  pos1 = [0,0] 
+  board[pos1] = Queen.new(:white, board, pos1)
+  pos2 = [0,7] 
+  board[pos2] = Rook.new(:white, board, pos2)
+  pos3 = [0,3]
+  board[pos3] = Knight.new(:black, board, pos3)
+  Q = board[[0,0]]
+  N = board[[0,3]]
+  R = board[[0,7]]
 end 
 

@@ -1,3 +1,5 @@
+require 'byebug'
+
 module Slideable
   
   def horizontal_dirs 
@@ -22,7 +24,7 @@ module Slideable
   DIAGONAL_DIRS = [ [-1, -1], [-1, 1], [1, -1], [1, 1] ]
 
   def move_dirs
-    horizontal_dirs + diagonal_dirs
+    horizontal_dirs + diagonal_dirs # should raise error so we catch when we forget to rewrite in piece subclasses
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)
@@ -31,24 +33,25 @@ module Slideable
     next_step = [pos[0] + dx, pos[1] + dy]
 
     blocked = false 
-
-    until blocked
-      if next_step[0] > 7 || next_step[1] > 7 
+    
+    # debugger
+    until blocked 
+      if !next_step[0].between?(0,7) || !next_step[1].between?(0,7)
+        # debugger 
         blocked = true
       elsif !board[next_step].empty?
+        # debugger
         blocked = true
         move_list << next_step if board[next_step].color != self.color
       else
+        # debugger
         move_list << next_step
         next_step = [next_step[0] + dx, next_step[1] + dy]
       end
     end
 
+    # debugger
     move_list
   end
 
- # until we are blocked, shovel position into move_list
- # Increment move, check if blocked, shovel, etc 
- # If blocked, are we blockd by opposing color
- # shovel position 
-  # end
+end

@@ -3,6 +3,8 @@ require_relative 'slideable'
 
 class Rook < Piece
   include Slideable
+  attr_reader :pos, :board, :color 
+
 
   def symbol
     :R

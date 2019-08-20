@@ -12,13 +12,13 @@ class Piece
 
   def empty?
     # check self to see if self is NullPiece
-    return false unless self.symbol == nil 
+    self.is_a?(NullPiece)
   end
 
   def valid_moves
     # for now, it will just be moves 
     #eventually will check for check 
-    
+
   end
 
   def pos=(val)
@@ -33,5 +33,9 @@ class Piece
   def move_into_check?(end_pos)
 
   end
+
+  # def inspect
+  #   symbol.inspect
+  # end
 
 end

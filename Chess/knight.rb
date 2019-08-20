@@ -3,6 +3,7 @@ require_relative 'stepable'
 
 class Knight < Piece
   include Stepable
+  attr_reader :pos, :board, :color 
 
   def symbol
     :N 
