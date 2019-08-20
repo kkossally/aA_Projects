@@ -33,3 +33,11 @@ module Slideable
     move_list
   end
 end
+
+# if dx.abs > 7 || dy.abs > 7
+#   return move_list
+# elsif !next_step.empty?
+#   raise ArgumentError.new("There's a piece there already!")
+# else
+#   move_list << next_step
+# end

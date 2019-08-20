@@ -11,11 +11,11 @@ class Piece
   end
 
   def empty?
-
+    # check self to see if self is NullPiece
   end
 
   def valid_moves
-
+    # 
   end
 
   def pos=(val)
@@ -23,7 +23,6 @@ class Piece
   end
 
   def symbol
-
   end
 
   private
