@@ -26,20 +26,26 @@ module Slideable
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)
-    move_list = [[dx, dy]]
-    next_step = [ (move_list.last[0] + dx), (move_list.last[1] + dy)]
-    if next_step[0].abs > 7 || next_step[1].abs > 7
-      return move_list
-    elsif !board[next_step].empty?
-      raise ArgumentError.new("There's a piece there already!")
-    else
-      move_list << next_step
+    move_list = []
+    
+    next_step = [pos[0] + dx, pos[1] + dy]
+
+    blocked = false 
+
+    until blocked
+      if next_step[0] > 7 || next_step[1] > 7 
+        blocked = true
+      elsif !board[next_step].empty?
+        blocked = true
+        move_list << next_step if board[next_step].color != self.color
+      else
+        move_list << next_step
+        next_step = [next_step[0] + dx, next_step[1] + dy]
+      end
     end
+
     move_list
   end
-end
-
-
 
  # until we are blocked, shovel position into move_list
  # Increment move, check if blocked, shovel, etc 
