@@ -2,7 +2,7 @@ require 'byebug'
 
 class Towers
   attr_reader :discs
-  attr_accessor :stacks
+  attr_accessor :stacks # we should make writing private, which will result in more robust tests
 
   def initialize(discs=5)
     @discs = discs

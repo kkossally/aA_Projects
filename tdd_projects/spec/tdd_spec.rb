@@ -3,6 +3,8 @@ require 'tdd'
 
 describe '#my_uniq' do
   subject(:arr) { [ 1, 2, 1, 3, 3] }
+  # should also check for mutation (check obj id)
+  # also check that original array is not mutated
   it 'returns arrays with unique elements in original order' do
     expect(my_uniq(arr)).to eq([1, 2, 3])
   end
@@ -24,6 +26,7 @@ end
 
 describe '#stockpicker' do
   subject(:arr) { [10, 8, 6, 2, 12, 5] }
+  # test as doc => what is the expeccted behavior for two equal days, etc.
   it 'outputs the pair of days with the highest positive price difference' do
     expect(stockpicker(arr)).to eq([3, 4])
   end
