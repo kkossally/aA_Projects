@@ -1,4 +1,29 @@
 /* Introduction to Cascading Style Sheets */
+<head>
+  input[type="radio"],select,input[type="submit"] {
+    cursor: pointer;
+    outline:none
+
+  }
+
+  input[type="submit"]:last-child {
+    background-color: gold
+  }
+
+  input:last-child:hover {
+    -webkit-filter: brightness(90%)
+  }
+
+  ol li:nth-child(even) {
+    background-color:lightgray
+  }
+
+  h2
+
+  Use the + operator to select the first review immediately after the Reviews header element and give it a 1px, solid, black, top border (Hint: the class for a submitted review will be .user_review).
+
+</head>
+
 
 body {
   /* If the user cannot load the Arial font, the sans-serif font is used */
