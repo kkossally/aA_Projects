@@ -137,14 +137,7 @@ def sparse_continents
       FROM
         countries
       WHERE
-        countries.name IN (
-        SELECT
-          countries.name
-        FROM
-          countries
-        WHERE
-          countries.population >= 25000000
-      )
+        countries.population >= 25000000
     );
   SQL
 end
