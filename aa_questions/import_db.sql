@@ -62,7 +62,8 @@ INSERT INTO
   users (fname, lname)
 VALUES
   ('Brandon', 'Warner'),
-  ('Kafele', 'Kossally');
+  ('Kafele', 'Kossally'),
+  ('Goku', 'Son');
   
 INSERT INTO
   questions (title, body, user_id)
@@ -76,7 +77,8 @@ VALUES
   ((SELECT id FROM users WHERE users.fname = 'Brandon'), (SELECT id FROM questions WHERE questions.title = 'When will I master the craft?')),
   ((SELECT id FROM users WHERE users.fname = 'Kafele'), (SELECT id FROM questions WHERE questions.title = 'SQL syntax?')),
   ((SELECT id FROM users WHERE users.fname = 'Kafele'), (SELECT id FROM questions WHERE questions.title = 'When will I master the craft?')),
-  ((SELECT id FROM users WHERE users.fname = 'Brandon'), (SELECT id FROM questions WHERE questions.title = 'SQL syntax?'));
+  ((SELECT id FROM users WHERE users.fname = 'Brandon'), (SELECT id FROM questions WHERE questions.title = 'SQL syntax?')),
+  ((SELECT id FROM users WHERE users.fname = 'Goku'), (SELECT id FROM questions WHERE questions.title = 'When will I master the craft?'));
 
 INSERT INTO
   question_likes (user_id, question_id)
