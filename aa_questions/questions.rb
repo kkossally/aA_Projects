@@ -26,6 +26,19 @@ class User
     SQL
     User.new(*data)
   end
+
+  def self.find_by_name(fname, lname)
+    data = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+      SELECT
+        *
+      FROM
+        users
+      WHERE
+        users.fname = ?
+        AND users.lname = ?
+    SQL
+    data.map { |datum| User.new(datum) }
+  end
   
   def initialize(options)
     @id = options['id']
@@ -33,6 +46,13 @@ class User
     @lname = options['lname']
   end
 
+  def authored_questions
+    Question.find_by_user_id(self.id)
+  end
+
+  def authored_replies
+    Reply.find_by_user_id(self.id)
+  end
 
 end
 
@@ -52,9 +72,29 @@ class Question
     Question.new(*data)
   end
 
+  def self.find_by_user_id(user_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+      SELECT
+        *
+      FROM
+        questions
+      WHERE
+        questions.user_id = ?
+    SQL
+    data.map { |datum| Question.new(datum) }
+  end
+
   def initialize(options)
     @id, @title = options['id'], options['title']
     @body, @user_id = options['body'], options['user_id']
+  end
+
+  def author
+    User.find_by_id(self.user_id)
+  end
+
+  def replies
+    Reply.find_by_question_id(self.id)
   end
 
 end
@@ -73,6 +113,34 @@ class QuestionFollow
         question_follows.id = ?
     SQL
     QuestionFollow.new(*data)
+  end
+
+  def self.followers_for_question_id(question_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT
+        *  
+      FROM
+        question_follows
+      JOIN
+        users ON question_follows.user_id = users.id
+      WHERE
+        question_follows.question_id = ?
+    SQL
+    data.map { |datum| User.new(datum) }
+  end
+
+  def self.followed_questions_for_user_id(user_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+      SELECT
+        *  
+      FROM
+        question_follows
+      JOIN
+        questions ON question_follows.question_id = questions.id
+      WHERE
+        question_follows.user_id = ?
+    SQL
+    data.map { |datum| Question.new(datum) }
   end
 
   def initialize(options)
@@ -97,10 +165,58 @@ class Reply
     Reply.new(*data)
   end
 
+  def self.find_by_user_id(user_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+      SELECT
+        *
+      FROM
+        replies
+      WHERE
+        replies.user_id = ?
+    SQL
+    data.map { |datum| Reply.new(datum) }
+  end
+
+  def self.find_by_question_id(question_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT
+        *
+      FROM
+        replies
+      WHERE
+        replies.question_id = ?
+    SQL
+    data.map { |datum| Reply.new(datum) }
+  end
+
   def initialize(options)
     @id, @question_id = options['id'], options['question_id']
     @body, @user_id = options['body'], options['user_id']
     @parent_id = options['parent_id']
+  end
+
+  def author
+    User.find_by_id(self.user_id)
+  end
+
+  def question
+    Question.find_by_id(self.question_id)
+  end
+
+  def parent_reply
+    Reply.find_by_id(self.parent_id)
+  end
+
+  def child_replies
+    data = QuestionsDatabase.instance.execute(<<-SQL, id)
+      SELECT
+        *
+      FROM
+        replies
+      WHERE
+        replies.parent_id = ?
+    SQL
+    data.map { |datum| Reply.new(datum) }
   end
 
 end

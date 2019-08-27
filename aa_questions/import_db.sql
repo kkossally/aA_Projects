@@ -90,6 +90,10 @@ VALUES
   ('Never!',(SELECT id FROM questions WHERE questions.title = 'When will I master the craft?'),
     (SELECT id FROM users WHERE users.fname = 'Kafele'), NULL),
   ('Huh?',(SELECT id FROM questions WHERE questions.title = 'SQL syntax?'),
-    (SELECT id FROM users WHERE users.fname = 'Brandon'), NULL),
+    (SELECT id FROM users WHERE users.fname = 'Brandon'), NULL);
+
+INSERT INTO
+  replies (body, question_id, user_id, parent_id)
+VALUES
   ('Lies!!!',(SELECT id FROM questions WHERE questions.title = 'When will I master the craft?'),
     (SELECT id FROM users WHERE users.fname = 'Brandon'), (SELECT id FROM replies WHERE replies.body = 'Never!'));
