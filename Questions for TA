@@ -1,0 +1,4 @@
+1. How do we use the dbconsole to translate ActiveRecord queries into SQL queries?
+select movies.id, title from movies join castings on movies.id = castings.movie_id join actors on actors.id = castings.actor_id where actor.name = 'Harrison Ford'
+
+Movie.select(:id, :title).joins(:castings).joins(:actors).where("actors.name = 'Harrison Ford'")
