@@ -15,16 +15,11 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    if user
-      render json: user
-    else
-      render json: user.errors.full_messages, status: :not_found
-    end
+    render json: user
   end
 
   def update
     user = User.find(params[:id])
-    # debugger
     if user.update(user_params)
       render json: user
     else
@@ -34,18 +29,14 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user
-      user.destroy
-      redirect_to users_url
-    else
-      render json: 'User not found', status: 404
-    end
+    user.destroy
+    redirect_to users_url
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name,:email)
+    params.require(:user).permit(:username)
   end
 
 end
