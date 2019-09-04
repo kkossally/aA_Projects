@@ -1,4 +1,6 @@
 class UsersController < ApplicationController 
+  # before_action :ensure_logged_in, only:[:destroy, :create]
+  
   def new 
     render :new
   end 
