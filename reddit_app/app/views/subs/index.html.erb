@@ -1,0 +1,10 @@
+<h2>Subs Unlimited</h2>
+<ul>
+  <% @subs.each do |sub| %>
+    <li>
+      <%= sub.moderator.username %>: 
+      <a href="<%= sub_url(sub) %>"><%= sub.title %></a>
+      [<a href="<%= edit_sub_url(sub) %>">Edit</a>]
+    </li>
+  <% end %>
+</ul>
