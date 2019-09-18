@@ -4,7 +4,6 @@ class FollowsController < ApplicationController
   def create
     # simulate latency
     sleep(1)
-
     @follow = current_user.out_follows.create!(followee_id: params[:user_id])
 
     respond_to do |format|
@@ -16,7 +15,6 @@ class FollowsController < ApplicationController
   def destroy
     # simulate latency
     sleep(1)
-
     @follow = current_user.out_follows.find_by(followee_id: params[:user_id])
     @follow.destroy!
 

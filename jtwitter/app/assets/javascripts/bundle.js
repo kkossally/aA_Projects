@@ -86,6 +86,38 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/api_util.js":
+/*!******************************!*\
+  !*** ./frontend/api_util.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const APIUtil = {
+  followUser: id => {
+    return $.ajax({
+      dataType: 'json',
+      method: 'POST',
+      url: `/users/${id}/follow`
+    });
+  },
+
+  unfollowUser: id => {
+    return $.ajax({
+      dataType: 'json',
+      method: 'DELETE',
+      url: `/users/${id}/follow`
+    });
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (APIUtil);
+
+
+/***/ }),
+
 /***/ "./frontend/follow_toggle.js":
 /*!***********************************!*\
   !*** ./frontend/follow_toggle.js ***!
@@ -95,50 +127,62 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api_util.js */ "./frontend/api_util.js");
+
+
 class FollowToggle {
   constructor($el) {
-    debugger
     this.$el = $el;
     this.userId = this.$el.data("user-id");
     this.followState = this.$el.data("initial-follow-state");
     this.render();
     this.handleClick();
-  }
+  };
 
-  toggleFollowState() {
-    if(this.followState === 'unfollowed') {
+  successCB() {
+    if (this.followState === "unfollowed") {
       this.followState = "followed";
-    } else {
+    } else if (this.followState === "followed") {
+      this.followState = "unfollowed";
+    } else if (this.followState === "Following...") {
+      this.followState = "followed";
+    } else if (this.followState === "Unfollowing...") {
       this.followState = "unfollowed";
     }
+    this.render();
   }
 
   render() {
-    if(this.followState === 'unfollowed'){
+    if (this.followState === "unfollowed"){
       this.$el.text("Follow!");
-    } else {
+    } else if (this.followState === "followed") {
       this.$el.text("Unfollow!");
+    } else {
+      this.$el.text(`${this.followState}`);
+    }
+
+    if (this.followState === 'Following...' || this.followState === 'Unfollowing...') {
+      this.$el.prop("disabled", true)
+    } else {
+      this.$el.prop("disabled", false)
     }
   }
 
   handleClick(){
     this.$el.on("click", e => {
       e.preventDefault();
-      const method = (this.followState === 'unfollowed' ? 'POST' : 'DELETE');
 
-      return $.ajax({
-        dataType: 'JSON',
-        method: `${method}`,
-        url: `/users/${this.userId}/follow`,
-        success: () => {
-          this.toggleFollowState();
-          this.render();
-        }
-      });
-
+      if (this.followState === "unfollowed") {
+        this.followState = "Following...";
+        this.render();
+        _api_util_js__WEBPACK_IMPORTED_MODULE_0__["default"].followUser(this.userId).then(this.successCB.bind(this));
+      } else {
+        this.followState = "Unfollowing...";
+        this.render();
+        _api_util_js__WEBPACK_IMPORTED_MODULE_0__["default"].unfollowUser(this.userId).then(this.successCB.bind(this));
+      }
     });
   }
-
 }
 
 
@@ -156,6 +200,8 @@ class FollowToggle {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _follow_toggle_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
+/* harmony import */ var _api_util_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api_util.js */ "./frontend/api_util.js");
+
 
 
 $(() => {
