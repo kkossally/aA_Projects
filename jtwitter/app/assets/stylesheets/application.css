@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+ .follow-toggle {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: peachpuff;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 1000;
+  color: saddlebrown;
+ }
+ 
+ html {
+   background-color: lavenderblush;
+ }
+
+ a {
+   font-size: 20px;
+   color: red;
+ }
