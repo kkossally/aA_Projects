@@ -9,9 +9,11 @@ window.$l = function(selector) {
   
   if(selector instanceof HTMLElement) {
     elements = [selector];
-  } else if(selector instanceof String) {
+  } else if (typeof selector === 'string') {
     elements = Array.from(document.querySelectorAll(selector));
   }
   return new DOMNodeCollection(elements);
   // return elements;
 }
+
+// window.DOMNodeCollection = DOMNodeCollection
