@@ -1,0 +1,84 @@
+body, h1, div, p, ul, li {
+  margin: 0;
+  border: 0;
+  padding: 0;
+
+  font: inherit;
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+  text-align: inherit;
+  text-decoration: inherit;
+  color: inherit;
+
+  background: transparent;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.clock-box {
+  position: relative;
+  margin: 0 auto;
+  padding: 10px;
+  width: 60%;
+  border-radius: 10px;
+  
+  align-content: center;
+  background-color: lavenderblush;
+  
+}
+
+.clock-box p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: medium;
+  margin-bottom: 20px;
+  /* position: absolute; */
+  /* top: 50%;
+  height: 50%; */
+}
+
+.tabs {
+  position: relative;
+  margin: 0 auto;
+  width: 75%;
+  height: 100px; 
+}
+
+.tab-headers {
+  margin-top: 50px; 
+  display: flex;
+  justify-content: space-around;
+  width: 48%;
+}
+
+.tab-headers li {
+  border: solid black;
+  padding: 5px;
+  border-radius: 5px;
+  list-style: none;
+  text-align: center;
+  vertical-align: center;
+  cursor: pointer;
+}
+
+.tab-headers li:hover{
+  background-color: black;
+  color: white;
+}
+.tab-content {
+  padding: 5px;
+  border-radius: 5px;
+  width: 47.5462%;
+  text-align: center;
+  vertical-align: center;
+  background-color: white;
+  color: black;
+  border: solid black;
+}
