@@ -1,0 +1,8 @@
+1. How do we use the dbconsole to translate ActiveRecord queries into SQL queries?  use .to_sql
+
+2. How do we implement a responses method for the user model?
+3. Should we have a responses method for our question model?
+
+4. Why are we unable to seed our Response model?
+
+

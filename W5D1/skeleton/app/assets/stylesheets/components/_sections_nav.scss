@@ -1,0 +1,16 @@
+.section-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $sans-serif;
+}
+
+.section-nav li {
+  margin: 5px;
+}
+
+.section-nav li:hover {
+  background-color: $gray;
+  text-decoration: underline;
+  // filter: blur(10px);
+}
