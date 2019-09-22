@@ -1,0 +1,23 @@
+<h1>New Post!</h1> <!--for: <%#= @post.sub.title %>-->
+
+<form action="<%= sub_posts_url(params[:sub_id]) %>" method="POST">
+  <%= auth_token_input %>
+
+  <label for="title">Title</label>
+  <input  id="title" type="text" name="post[title]" value="<%= @post.title %>">
+
+  <label for="url">URL</label>
+  <input  id="url" type="text" name="post[url]" value="<%= @post.url %>">
+
+  <label for="content">
+    Content
+    <textarea id="content" name="post[content]"><%= @post.content %></textarea>
+  </label>
+
+  <% Sub.all.each do |sub| %>
+    <%= sub.title %>
+    <input type="checkbox" name="post[postsub][]" value="<%= sub.id %>">
+  <% end %>
+
+  <input type="submit" value="Post it!">
+</form>

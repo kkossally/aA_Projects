@@ -1,0 +1,12 @@
+1. Is there a DRY way to write ::pasrse_all?
+  No
+2. "                         " ::find?
+  No
+3. Should I drop the first element of the columns array when inserting?
+  Yes
+4. Why does the insert query not object to quotations in the interpolation?
+  Because the interpolation knows to concatenate what is being interpolated with
+  what it is being interpolated into.
+5. Why does putting () around set_line cause it to fail?
+  Because SQL syntax!
+6. 
