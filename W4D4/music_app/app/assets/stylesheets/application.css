@@ -1,0 +1,87 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ html, body, div, span, h1, h2, a, p, ul, li, form, label {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+    box-sizing: content-box;
+  }
+  body {
+    display: block;
+    background-color: slategray;
+  }
+
+ .main-content {
+    width: 800px;
+    padding: 30px;
+    min-height: 100vh;
+    margin: auto;
+    border: solid lightsteelblue;
+    border-width: 0 5px;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1, h2 {
+    font-family: 'Optima', sans-serif;
+  }
+
+ h1 {
+    display: block;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+ } 
+
+ h2 {
+   font-size: 30px;
+   margin-bottom: 15px;
+   color: darkorange
+ }
+
+ .logo {
+    font-size: 75px;
+    margin-bottom: 30px;
+    color: royalblue;
+ }
+
+ .button {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: indianred;
+    color: #000;
+    margin-bottom: 20px;
+    text-decoration: none;
+
+ }
+
+ input[type="submit"]{
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: indianred;
+    margin-bottom: 20px;
+ }
