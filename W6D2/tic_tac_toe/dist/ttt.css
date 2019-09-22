@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  font-family: fantasy;
+  font-size: 50px;
+}
+
+#grid {
+  height: 310px;
+  width: 310px;
+  margin: 30px auto;
+  border: 5px solid black;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  list-style: none;
+  width: calc(100% / 3);
+  height: calc(100% / 3);
+  margin: 0px auto;
+  border: 5px solid black;
+  background-color: grey;
+}
+
+.nonyellow:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.x, .o {
+  background: white;
+  cursor: default;
+}
+
+.x:after, .o:after {
+  font-size: 90px;
+  line-height: 100px;
+  display: block;
+  font-family: fantasy;
+  text-align: center;
+}
+
+.x:after {
+  content: "x";
+  color: red;
+}
+
+.o:after {
+  content: "o";
+  color: royalblue;
+}
+
+.celebrate {
+  background-color: purple;
+}

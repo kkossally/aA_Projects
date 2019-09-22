@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RedditApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if logged_in? %>
+      <%= current_user.username %>
+      <form action="<%= session_url %>" method="POST">
+        <%= auth_token_input %>
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Sign Out">
+      </form>
+    <% else %>
+      <a href="<%= new_user_url %>">Sign Up, Please (I need a win)</a>
+      <br>
+    <% end %>
+
+    <a href="<%= subs_url %>">All Subs</a>
+    <br>
+    <a href="<%= new_sub_url %>">Create a sub!</a>
+    
+    <br>
+    <%= flash[:errors].join("<br>").html_safe if flash[:errors] %>
+
+    <%= yield %>
+  </body>
+</html>
