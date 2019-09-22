@@ -1,0 +1,14 @@
+<hr>
+
+<h2><%= @post.title %></h2>
+Author: <%= @post.author.username %>
+
+<br>
+
+<h3>Post Content</h3>
+<a href="<%= @post.url %>">Link</a>
+<br>
+<%= @post.content %>
+
+<!--Add Edit Post Link... Link to current sub-->
+<a href="<%= edit_post_url(@post) %>">Edit Post!</a>
