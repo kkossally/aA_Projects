@@ -1,0 +1,14 @@
+<h2 class="page-header">Sign Up</h2>
+<a class="button" href="<%= new_session_url %>">Sign In</a>
+
+<form action="<%= users_url %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="email">Email</label>
+  <input id="email" type="text" name="user[email]" value="">
+  
+  <label for="password">Password</label>
+  <input id="password" type="password" name="user[password]" value="">
+
+  <input type="submit" value="Sign Up">
+</form>
