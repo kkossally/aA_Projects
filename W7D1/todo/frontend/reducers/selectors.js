@@ -6,6 +6,6 @@ const allTodos = (state) => {
   }); 
 }
 
-window.allTodos = allTodos; 
+// window.allTodos = allTodos; 
 
 export default allTodos; 
