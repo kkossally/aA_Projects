@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 const Greeting = ({currentUser, logout}) => {
   const personalGreeting = () => (
     <>
-      <h3>Hello {currentUser.username}</h3>
-      <button onClick={logout}>Logout</button>
+      <h3>
+        Hello {currentUser.username}
+        <button onClick={logout}>Logout</button>
+      </h3>
     </>
    );
    
