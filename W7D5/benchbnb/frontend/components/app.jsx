@@ -4,6 +4,7 @@ import GreetingContainer from './greeting_container';
 import AuthRoute from '../util/route_util';
 import LoginFormContainer from './login_form_container';
 import SignupFormContainer from './signup_form_container';
+import SearchContainer from './search_container';
 
 const App = () => {
   return (
@@ -17,8 +18,9 @@ const App = () => {
         <GreetingContainer />
       </header>
 
-      <AuthRoute path="/login" component={LoginFormContainer}/>
-      <AuthRoute path="/signup" component={SignupFormContainer}/>
+      <AuthRoute exact path="/login" component={LoginFormContainer}/>
+      <AuthRoute exact path="/signup" component={SignupFormContainer}/>
+      <Route exact path="/" component={SearchContainer}/>
     </>
   )
 }

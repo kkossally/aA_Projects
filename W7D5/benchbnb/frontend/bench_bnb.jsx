@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root';
 import {signup, login, logout} from './actions/session_actions';
+import { fetchBenches } from './actions/bench_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
@@ -24,7 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.signup = signup;
     // window.login = login;
     // window.logout = logout;
-    // window.dispatch = (store.dispatch);
+    window.getState = store.dispatch;
+    window.dispatch = (store.dispatch);
+    window.fetchBenches = fetchBenches;
   //TESTING
   
   const root = document.getElementById("root");

@@ -14,7 +14,7 @@ class SessionForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(() => this.props.history.push("/"));
+    this.props.processForm(user);
   }
 
   update(field) {
@@ -23,18 +23,16 @@ class SessionForm extends React.Component {
 
   render() {
     const linkText = (this.props.formType === 'login' ? 'signup' : 'login');
-
-    // debugger
     
     return (
       <>
-        <header className="session-form-header">
-          {this.props.errors.session} <br/>
-          {this.props.formType} <br/>
-          <Link to={`/${linkText}`}>{linkText}</Link>
-        </header>
 
         <form onSubmit={this.handleSubmit}>
+          Please {this.props.formType}
+          <Link to={`/${linkText}`}>{linkText}</Link>
+          <br/>
+          {this.props.errors.session}
+          <br/>
           <label>
             Username
             <input type="text" value={this.state.username} onChange={this.update("username")}/>
